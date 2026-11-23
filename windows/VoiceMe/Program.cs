@@ -12,7 +12,7 @@ public sealed class MainForm : Form {
     private readonly Button toggle = new() { Text = "START BAD MICROPHONE", Dock = DockStyle.Top, Height = 54 };
     private readonly Label state = new() { Text = "OFF", Dock = DockStyle.Top, Height = 50, TextAlign = ContentAlignment.MiddleCenter, Font = new Font("Segoe UI", 16, FontStyle.Bold) };
     public MainForm() {
-        Text = "VoiceMe"; Width = 420; Height = 240; StartPosition = FormStartPosition.CenterScreen;
+        Text = "VoiceMe : VoiceChanger"; Width = 420; Height = 240; StartPosition = FormStartPosition.CenterScreen;
         Controls.Add(state); Controls.Add(toggle); toggle.Click += (_,_) => { if(active) StopAudio(); else StartAudio(); };
         FormClosing += (_,_) => StopAudio();
     }
@@ -32,7 +32,7 @@ public sealed class MainForm : Form {
                 buffer?.AddSamples(data,0,e.BytesRecorded);
             };
             input.StartRecording(); active=true; state.Text="BAD MICROPHONE · ON"; toggle.Text="STOP VOICE CHANGER";
-        } catch(Exception ex) { StopAudio(); MessageBox.Show(ex.Message,"VoiceMe"); }
+        } catch(Exception ex) { StopAudio(); MessageBox.Show(ex.Message,"VoiceMe : VoiceChanger"); }
     }
     private void StopAudio() {
         active=false; try { input?.StopRecording(); } catch {} input?.Dispose(); input=null;
