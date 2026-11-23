@@ -54,7 +54,7 @@ class MicService : Service() {
                     if (count > 0) {
                         for (i in 0 until count) {
                             val x = input[i].toFloat() / 32768f
-                            val shaped = tanh(x * 3.2f) / tanh(3.2f)
+                            val shaped = tanh(x.toDouble() * 3.2) / tanh(3.2)
                             input[i] = (shaped * 32767f).toInt().coerceIn(-32768, 32767).toShort()
                         }
                         player?.write(input, 0, count)
