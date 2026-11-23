@@ -1,36 +1,34 @@
 # VoiceMe : VoiceChanger
 
-VoiceMe : VoiceChanger is a classic-style microphone and voice workspace. The desktop and mobile layouts are intentionally different: a full control panel on larger screens and a touch-friendly navigation layout on phones.
+VoiceMe is a real-time microphone effects project with separate desktop and mobile interfaces.
 
-## Basic features in this prototype
+## Features
+- Live microphone capture and device selection.
+- Real-time Windows voice effects: Normal, Streamer, Deep, Radio, Robot, Demon, Echo and Bad Microphone.
+- Effect strength and output-volume controls.
+- Windows output-device routing, including virtual audio cable devices when installed.
+- Browser microphone controls, EQ, tone shaping, noise suppression options and input meter.
+- Built-in voice profiles, text-to-speech using installed system voices, and processed microphone recording.
+- Separate desktop sidebar and mobile bottom navigation.
+- Installable PWA shell with offline app-shell caching.
 
-- Microphone access with device selection.
-- Live input-level meter.
-- Bass, mid and treble equalizer.
-- Voice Character controls: softness, clarity, warmth, presence and compression.
-- Built-in microphone profiles: Normal, Soft, Deep, Clear, Bold, Streamer, Radio, Studio and Bad Microphone.
-- Noise reduction, echo cancellation and automatic gain capture options (browser/device support varies).
-- Text-to-speech using voices installed in the browser or operating system.
-- Recording of the processed microphone output and download as WebM/Opus when supported.
-- Installable PWA shell and basic offline caching.
+## Windows: sending the changed voice to other apps
+The Windows app can send processed microphone audio to a selected playback endpoint. To make Discord, games or meeting apps receive it as a microphone, install a trusted virtual audio cable driver such as VB-CABLE separately:
+1. In VoiceMe, select your physical microphone as **Microphone Input**.
+2. Select **CABLE Input** as **Output Device**.
+3. Start VoiceMe.
+4. In Discord or the game, choose **CABLE Output** as the microphone input.
 
-## Run / publish
+The virtual cable driver is not bundled with VoiceMe. Without one, VoiceMe can play the processed signal through a normal output device for local monitoring, but other apps will not receive it as a microphone. Use headphones to avoid feedback.
 
-Enable GitHub Pages for the repository using the `main` branch and root folder. Open the published HTTPS URL and allow microphone access. For local development, use a local web server (localhost); microphone access is not available from most direct `file://` launches.
+## Android and browser limitations
+Android does not allow an ordinary app or PWA to replace the microphone system-wide for every other app. The Android build currently provides an app-local microphone experience; it is not a system virtual microphone. Mobile browsers may suspend microphone capture in the background.
 
-## Platform notes
+## Voice processing notes
+The effects are real-time audio transformations, not voice cloning. Deep/Radio/Robot/Demon/Echo/Bad Microphone use different signal-processing effects. No real person's voice is replicated. Text-to-speech uses voices installed on the device; no cloud AI voice service or API key is included.
 
-- **Desktop:** this is currently the browser/PWA prototype. A native Windows desktop build and system-wide virtual microphone driver/routing are separate future engineering tasks.
-- **Mobile:** the responsive PWA offers touch-friendly controls. Mobile browsers may suspend microphone capture in the background and do not generally let a website replace the microphone input of other apps.
-- **Speech voices:** Text-to-speech uses the device/browser speech synthesis engine. The list and quality of voices depend on the operating system and browser. This is not cloud AI voice generation.
-- **Voice processing:** EQ, filters and compression shape the microphone tone. The Streamer profile is an original broadcast-style preset. Bad Microphone adds intentionally rough lo-fi distortion and heavy compression; test it at a low listening volume. Neither preset imitates or clones a particular person.
-- **AI voice services:** no API keys or provider secrets are stored in this repository. A real cloud TTS provider should be connected through a secure backend.
-- **Character voices:** use only voice assets and models that are licensed or authorized.
+## Build
+GitHub Actions builds the Android APK and Windows EXE from the native projects under `android/` and `windows/`. Download build artifacts from the Actions run after both jobs complete successfully.
 
-## Files
-
-- `index.html` — application structure
-- `styles.css` — classic desktop and mobile styling
-- `app.js` — microphone DSP, presets, speech synthesis and recording
-- `manifest.webmanifest` — PWA metadata
-- `service-worker.js` — app-shell cache
+## Web app
+Run from localhost or an HTTPS host to enable microphone access. Cloudflare deployment will be configured later.
