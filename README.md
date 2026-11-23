@@ -1,6 +1,6 @@
-# VoiceMe
+# VoiceMe : VoiceChanger
 
-VoiceMe is a classic-style microphone and voice workspace. The desktop and mobile layouts are intentionally different: a full control panel on larger screens and a touch-friendly navigation layout on phones.
+VoiceMe : VoiceChanger is a classic-style microphone and voice workspace. The desktop and mobile layouts are intentionally different: a full control panel on larger screens and a touch-friendly navigation layout on phones.
 
 ## Basic features in this prototype
 
