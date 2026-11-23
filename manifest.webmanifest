@@ -1,0 +1,10 @@
+{
+  "name": "VoiceMe",
+  "short_name": "VoiceMe",
+  "description": "Microphone controls and voice workspace",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#eef1f4",
+  "theme_color": "#d7dce2",
+  "orientation": "any"
+}
