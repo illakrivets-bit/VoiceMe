@@ -8,7 +8,7 @@ VoiceMe is a classic-style microphone and voice workspace. The desktop and mobil
 - Live input-level meter.
 - Bass, mid and treble equalizer.
 - Voice Character controls: softness, clarity, warmth, presence and compression.
-- Built-in microphone profiles: Normal, Soft, Deep, Clear, Bold, Streamer, Radio and Studio.
+- Built-in microphone profiles: Normal, Soft, Deep, Clear, Bold, Streamer, Radio, Studio and Bad Microphone.
 - Noise reduction, echo cancellation and automatic gain capture options (browser/device support varies).
 - Text-to-speech using voices installed in the browser or operating system.
 - Recording of the processed microphone output and download as WebM/Opus when supported.
@@ -23,7 +23,7 @@ Enable GitHub Pages for the repository using the `main` branch and root folder. 
 - **Desktop:** this is currently the browser/PWA prototype. A native Windows desktop build and system-wide virtual microphone driver/routing are separate future engineering tasks.
 - **Mobile:** the responsive PWA offers touch-friendly controls. Mobile browsers may suspend microphone capture in the background and do not generally let a website replace the microphone input of other apps.
 - **Speech voices:** Text-to-speech uses the device/browser speech synthesis engine. The list and quality of voices depend on the operating system and browser. This is not cloud AI voice generation.
-- **Voice processing:** EQ, filters and compression shape the microphone tone. The Streamer profile is an original broadcast-style preset, not an imitation or clone of a particular person.
+- **Voice processing:** EQ, filters and compression shape the microphone tone. The Streamer profile is an original broadcast-style preset. Bad Microphone adds intentionally rough lo-fi distortion and heavy compression; test it at a low listening volume. Neither preset imitates or clones a particular person.
 - **AI voice services:** no API keys or provider secrets are stored in this repository. A real cloud TTS provider should be connected through a secure backend.
 - **Character voices:** use only voice assets and models that are licensed or authorized.
 
