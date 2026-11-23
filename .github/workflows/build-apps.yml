@@ -1,4 +1,4 @@
-name: Build VoiceMe apps
+name: Build VoiceMe VoiceChanger apps
 on:
   workflow_dispatch:
   push:
@@ -12,11 +12,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-java@v4
+      - uses: actions/setup-java@v5
         with:
           distribution: temurin
           java-version: '17'
-      - uses: android-actions/setup-android@v3
+      - name: Set up Android SDK
+        run: |
+          yes | "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" --licenses
+          "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" "platform-tools" "platforms;android-35" "build-tools;35.0.0"
       - uses: gradle/actions/setup-gradle@v4
         with:
           gradle-version: '8.9'
@@ -24,7 +27,7 @@ jobs:
         run: gradle -p android assembleDebug
       - uses: actions/upload-artifact@v4
         with:
-          name: VoiceMe-Android-APK
+          name: VoiceMe-VoiceChanger-Android-APK
           path: android/app/build/outputs/apk/debug/*.apk
   windows:
     runs-on: windows-latest
@@ -37,5 +40,5 @@ jobs:
         run: dotnet publish windows/VoiceMe/VoiceMe.csproj -c Release -r win-x64 --self-contained true -p:PublishSingleFile=true -o publish
       - uses: actions/upload-artifact@v4
         with:
-          name: VoiceMe-Windows-EXE
+          name: VoiceMe-VoiceChanger-Windows-EXE
           path: publish/**
