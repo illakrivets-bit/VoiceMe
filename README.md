@@ -1,34 +1,36 @@
 # VoiceMe
 
-VoiceMe is a desktop and mobile voice workspace with a classic, practical interface.
+VoiceMe is a classic-style microphone and voice workspace. The desktop and mobile layouts are intentionally different: a full control panel on larger screens and a touch-friendly navigation layout on phones.
 
-## Project direction
+## Basic features in this prototype
 
-- **Desktop:** full control-panel layout for Windows first; native desktop packaging is planned.
-- **Mobile:** a separate compact layout designed for touch screens; installable as a PWA.
-- **Microphone:** input selection, live level meter, volume and tone controls (bass, mid, treble).
-- **Voice changer:** adjustable effects and saved presets.
-- **AI Voice:** a planned text-to-speech area and voice library. AI generation will be connected through a provider API later; no API keys belong in the client or GitHub.
-- **Recordings:** planned local recording and export.
+- Microphone access with device selection.
+- Live input-level meter.
+- Bass, mid and treble equalizer.
+- Voice Character controls: softness, clarity, warmth, presence and compression.
+- Built-in microphone profiles: Normal, Soft, Deep, Clear, Bold, Streamer, Radio and Studio.
+- Noise reduction, echo cancellation and automatic gain capture options (browser/device support varies).
+- Text-to-speech using voices installed in the browser or operating system.
+- Recording of the processed microphone output and download as WebM/Opus when supported.
+- Installable PWA shell and basic offline caching.
 
-## Current prototype
+## Run / publish
 
-The first web prototype includes a responsive desktop/mobile shell and browser microphone monitoring with basic tone controls. Browser microphone access requires HTTPS or localhost and the user's permission.
+Enable GitHub Pages for the repository using the `main` branch and root folder. Open the published HTTPS URL and allow microphone access. For local development, use a local web server (localhost); microphone access is not available from most direct `file://` launches.
 
-## Run locally
+## Platform notes
 
-Open the repository with a local development server (for example, VS Code Live Server), then open the local HTTPS/localhost address in a supported browser. Opening `index.html` directly may limit microphone features.
+- **Desktop:** this is currently the browser/PWA prototype. A native Windows desktop build and system-wide virtual microphone driver/routing are separate future engineering tasks.
+- **Mobile:** the responsive PWA offers touch-friendly controls. Mobile browsers may suspend microphone capture in the background and do not generally let a website replace the microphone input of other apps.
+- **Speech voices:** Text-to-speech uses the device/browser speech synthesis engine. The list and quality of voices depend on the operating system and browser. This is not cloud AI voice generation.
+- **Voice processing:** EQ, filters and compression shape the microphone tone. The Streamer profile is an original broadcast-style preset, not an imitation or clone of a particular person.
+- **AI voice services:** no API keys or provider secrets are stored in this repository. A real cloud TTS provider should be connected through a secure backend.
+- **Character voices:** use only voice assets and models that are licensed or authorized.
 
-## Important limitations
+## Files
 
-- Browser audio processing affects audio inside VoiceMe; it does not yet create a system-wide virtual microphone for Discord or games.
-- Mobile browsers restrict background microphone use and routing audio into other apps.
-- Character voices and recognizable game-character voices require appropriately licensed or authorized voice assets/models.
-
-## Repository structure
-
-- `index.html` — application shell
-- `styles.css` — classic desktop and mobile layouts
-- `app.js` — microphone and interface logic
+- `index.html` — application structure
+- `styles.css` — classic desktop and mobile styling
+- `app.js` — microphone DSP, presets, speech synthesis and recording
 - `manifest.webmanifest` — PWA metadata
-- `service-worker.js` — basic offline app shell
+- `service-worker.js` — app-shell cache
