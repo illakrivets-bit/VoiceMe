@@ -25,7 +25,7 @@ class MicService : Service() {
         if (intent?.action == "STOP") { stopSelf(); return START_NOT_STICKY }
         createChannel()
         val stopIntent = PendingIntent.getService(this, 1, Intent(this, MicService::class.java).setAction("STOP"), PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE)
-        val notification = if (Build.VERSION.SDK_INT >= 26) Notification.Builder(this, "voiceme_mic").setContentTitle("VoiceMe").setContentText("Bad Microphone is ON").setSmallIcon(android.R.drawable.ic_btn_speak_now).addAction(0, "Turn off", stopIntent).build() else Notification.Builder(this).setContentTitle("VoiceMe").setContentText("Bad Microphone is ON").setSmallIcon(android.R.drawable.ic_btn_speak_now).build()
+        val notification = if (Build.VERSION.SDK_INT >= 26) Notification.Builder(this, "voiceme_mic").setContentTitle("VoiceMe : VoiceChanger").setContentText("Bad Microphone is ON").setSmallIcon(android.R.drawable.ic_btn_speak_now).addAction(0, "Turn off", stopIntent).build() else Notification.Builder(this).setContentTitle("VoiceMe : VoiceChanger").setContentText("Bad Microphone is ON").setSmallIcon(android.R.drawable.ic_btn_speak_now).build()
         startForeground(7, notification)
         if (!running) startAudio()
         return START_NOT_STICKY
@@ -33,7 +33,7 @@ class MicService : Service() {
     private fun createChannel() {
         if (Build.VERSION.SDK_INT >= 26) {
             val manager = getSystemService(NotificationManager::class.java)
-            manager.createNotificationChannel(NotificationChannel("voiceme_mic", "VoiceMe microphone", NotificationManager.IMPORTANCE_LOW))
+            manager.createNotificationChannel(NotificationChannel("voiceme_mic", "VoiceMe : VoiceChanger", NotificationManager.IMPORTANCE_LOW))
         }
     }
     private fun startAudio() {
