@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#d7dce2">
+  <meta name="description" content="VoiceMe — microphone controls, voice effects and AI voice workspace.">
+  <title>VoiceMe</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="window">
+    <header class="titlebar">
+      <div class="app-mark">V</div>
+      <div class="brand"><strong>VoiceMe</strong><span>Voice control center</span></div>
+      <div class="window-status"><span class="status-dot"></span><span id="statusText">Microphone stopped</span></div>
+    </header>
+
+    <div class="app-layout">
+      <aside class="sidebar">
+        <div class="side-caption">WORKSPACE</div>
+        <button class="nav-item active" data-page="microphone"><span>▤</span> Microphone</button>
+        <button class="nav-item" data-page="changer"><span>♫</span> Voice Changer</button>
+        <button class="nav-item" data-page="ai"><span>▣</span> AI Voice</button>
+        <button class="nav-item" data-page="library"><span>▦</span> Voice Library</button>
+        <button class="nav-item" data-page="recordings"><span>▤</span> Recordings</button>
+        <div class="side-bottom"><div class="side-caption">DEVICE</div><div class="device-card"><span class="device-icon">◉</span><div><b>Audio input</b><small id="deviceLabel">Not connected</small></div></div></div>
+      </aside>
+
+      <main class="content">
+        <section class="page active" id="page-microphone">
+          <div class="page-heading"><div><div class="eyebrow">INPUT CONTROL</div><h1>Microphone settings</h1><p>Adjust your input sound and monitor the signal.</p></div><span class="classic-tag">AUDIO PANEL</span></div>
+          <div class="panel device-panel">
+            <div class="panel-title"><h2>Input device</h2><span class="panel-note">MICROPHONE</span></div>
+            <div class="device-row"><div class="mic-symbol">♩</div><div class="device-info"><b id="deviceName">No microphone selected</b><small>Allow microphone access to begin</small></div><button class="button primary" id="startMic">Start microphone</button><button class="button" id="stopMic" disabled>Stop</button></div>
+            <div class="meter-wrap"><div class="meter-label"><span>Input level</span><b id="levelValue">0%</b></div><div class="meter"><div id="levelBar"></div></div></div>
+          </div>
+          <div class="settings-grid">
+            <div class="panel"><div class="panel-title"><h2>Output level</h2><span class="panel-note">VOLUME</span></div><div class="range-line"><input id="volume" type="range" min="0" max="150" value="100"><output id="volumeValue">100%</output></div><p class="help">Controls the monitored microphone output.</p></div>
+            <div class="panel"><div class="panel-title"><h2>Tone controls</h2><span class="panel-note">EQUALIZER</span></div>
+              <div class="slider-row"><label for="bass">Bass</label><input id="bass" type="range" min="-12" max="12" value="0"><output id="bassValue">0 dB</output></div>
+              <div class="slider-row"><label for="mid">Mid</label><input id="mid" type="range" min="-12" max="12" value="0"><output id="midValue">0 dB</output></div>
+              <div class="slider-row"><label for="treble">Treble</label><input id="treble" type="range" min="-12" max="12" value="0"><output id="trebleValue">0 dB</output></div>
+            </div>
+          </div>
+          <div class="panel note-panel"><span class="info-icon">i</span><div><b>Local audio preview</b><p>Microphone audio is processed in this browser tab. Use headphones to help prevent feedback. System-wide virtual microphone routing is a future desktop feature.</p></div></div>
+        </section>
+
+        <section class="page" id="page-changer">
+          <div class="page-heading"><div><div class="eyebrow">VOICE EFFECTS</div><h1>Voice Changer</h1><p>Choose a starting point for your voice sound.</p></div></div>
+          <div class="panel"><div class="panel-title"><h2>Presets</h2><span class="panel-note">BUILT-IN</span></div><div class="preset-grid">
+            <button class="preset selected" data-preset="normal"><b>Normal</b><small>Original microphone tone</small></button>
+            <button class="preset" data-preset="deep"><b>Deep</b><small>Warm, lower tone</small></button>
+            <button class="preset" data-preset="bright"><b>Bright</b><small>Clear, brighter tone</small></button>
+            <button class="preset" data-preset="radio"><b>Radio</b><small>Band-limited radio style</small></button>
+          </div></div>
+          <div class="panel"><div class="panel-title"><h2>Effect status</h2></div><p class="help" id="effectDescription">Normal preset selected. Start the microphone to hear the local preview.</p></div>
+        </section>
+
+        <section class="page" id="page-ai">
+          <div class="page-heading"><div><div class="eyebrow">TEXT TO SPEECH</div><h1>AI Voice</h1><p>Prepare text for natural-sounding voice generation.</p></div></div>
+          <div class="panel"><div class="panel-title"><h2>Text to speak</h2><span class="panel-note">AI STUDIO</span></div><textarea id="speechText" rows="5" placeholder="Type or paste your text here..."></textarea><div class="form-row"><label for="voiceStyle">Voice category</label><select id="voiceStyle"><option>Friendly narrator</option><option>Documentary narrator</option><option>Game announcer</option><option>Calm assistant</option></select></div><div class="form-row"><label for="speechLanguage">Language</label><select id="speechLanguage"><option>English</option><option>Ukrainian</option><option>Polish</option><option>German</option><option>Spanish</option></select></div><button class="button primary" id="generateSpeech" disabled>AI generation — coming later</button><p class="help">The AI voice provider has not been connected yet. This area is ready for integration; no fake generation is performed.</p></div>
+        </section>
+
+        <section class="page" id="page-library">
+          <div class="page-heading"><div><div class="eyebrow">VOICE COLLECTION</div><h1>Voice Library</h1><p>A place for built-in, licensed and custom voices.</p></div></div>
+          <div class="panel"><div class="panel-title"><h2>Collections</h2><span class="panel-note">LIBRARY</span></div><div class="library-list"><div><b>Game & character style</b><small>Original and authorized character-style voices</small></div><span class="library-count">Planned</span></div><div class="library-list"><div><b>Narrators</b><small>Storytelling, documentary and presentation voices</small></div><span class="library-count">Planned</span></div><div class="library-list"><div><b>Community voices</b><small>Custom voices shared with permission</small></div><span class="library-count">Planned</span></div></div>
+        </section>
+
+        <section class="page" id="page-recordings">
+          <div class="page-heading"><div><div class="eyebrow">YOUR AUDIO</div><h1>Recordings</h1><p>Saved recordings will appear here.</p></div></div>
+          <div class="panel empty-state"><div class="empty-icon">♫</div><h2>No recordings yet</h2><p>Recording and audio export will be added in a later build.</p></div>
+        </section>
+      </main>
+    </div>
+    <nav class="mobile-nav"><button class="active" data-page="microphone">Mic</button><button data-page="changer">Effects</button><button data-page="ai">AI Voice</button><button data-page="library">Library</button><button data-page="recordings">Files</button></nav>
+    <footer class="statusbar"><span>VoiceMe prototype</span><span>Desktop & Mobile</span><span>Version 0.1.0</span></footer>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>
