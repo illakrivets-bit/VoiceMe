@@ -1,7 +1,7 @@
 {
-  "name": "VoiceMe",
+  "name": "VoiceMe : VoiceChanger",
   "short_name": "VoiceMe",
-  "description": "Microphone controls and voice workspace",
+  "description": "Microphone controls and voice changer",
   "start_url": "./",
   "display": "standalone",
   "background_color": "#eef1f4",
